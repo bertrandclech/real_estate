@@ -1,15 +1,30 @@
 <?php
 
-class DataBase
+abstract class DataBase
 {
+
     private string $db_host = 'localhost';
+
     private string $db_name = 'real_estate';
 
-    public function db()
+    private PDO $db;
+
+    /**
+     * Connect PDO
+     */
+    protected function getPDO(): PDO
+    {
+        return $this->builPDO();
+    }
+
+    /**
+     * Build a connection PDO with DataBase
+     */
+    private function builPDO(): PDO
     {
         try {
 
-            $db = new PDO(
+            $this->db = new PDO(
                 "mysql:host={$this->db_host};dbname={$this->db_name};charset=utf8",
                 "root",
                 "",
@@ -22,6 +37,6 @@ class DataBase
             echo 'Erreur connection database : ' . $e->getMessage();
         }
 
-        return $db;
+        return $this->db;
     }
 }
