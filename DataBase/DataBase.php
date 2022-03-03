@@ -1,5 +1,8 @@
 <?php
 
+/**
+ * Extends this Class only from "Manager" Class
+ */
 abstract class DataBase
 {
 

@@ -58,7 +58,6 @@ class AdvertEntity
     public function setTitle($title)
     {
         $this->title = $title;
-
         return $this;
     }
 
@@ -78,7 +77,6 @@ class AdvertEntity
     public function setDescription($description)
     {
         $this->description = $description;
-
         return $this;
     }
 
@@ -98,7 +96,6 @@ class AdvertEntity
     public function setPostcode($postcode)
     {
         $this->postcode = $postcode;
-
         return $this;
     }
 
@@ -110,7 +107,6 @@ class AdvertEntity
     public function setCity($city)
     {
         $this->city = $city;
-
         return $this;
     }
 
@@ -138,7 +134,6 @@ class AdvertEntity
     public function setPrice($price)
     {
         $this->price = $price;
-
         return $this;
     }
 
@@ -158,7 +153,6 @@ class AdvertEntity
     public function setReservation_message($reservation_message)
     {
         $this->reservation_message = $reservation_message;
-
         return $this;
     }
 
@@ -178,7 +172,6 @@ class AdvertEntity
     public function setCategory_id($category_id)
     {
         $this->category_id = $category_id;
-
         return $this;
     }
 
@@ -198,7 +191,6 @@ class AdvertEntity
     public function setCreated_at($created_at)
     {
         $this->created_at = $created_at;
-
         return $this;
     }
 }

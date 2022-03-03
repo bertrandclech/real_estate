@@ -11,7 +11,6 @@ class AdvertManager extends DataBase
     /** Table "category" */
     protected string $category = 'category';
 
-
     /**
      * Show Article (Accueil)
      */
