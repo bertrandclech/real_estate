@@ -1,0 +1,26 @@
+*{
+    margin: 0;
+    box-sizing: border-box;
+}
+
+body{
+    background-color: rgb(226, 226, 226);
+}
+
+/* page accueil */
+.box-annonce{
+    border: 1px solid #CCC;
+    margin: 1rem 0.3rem;
+    padding: 0.3rem;
+}
+
+/* footer */
+footer{
+    margin-top: 10rem;
+    padding: 2.5rem 1rem;
+    text-align: right;
+}
+
+footer p{
+    font-style: italic;
+}

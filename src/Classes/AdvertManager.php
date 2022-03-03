@@ -1,12 +1,36 @@
 <?php
 
 // Require Database
-require_once __DIR__ . '../../../DataBase/DataBase.php';
+require_once './DataBase/DataBase.php';
 
 class AdvertManager extends DataBase
 {
-    public function show()
+    /** Table "advert" */
+    protected string $advert = 'advert';
+
+    /** Table "category" */
+    protected string $category = 'category';
+
+
+    /**
+     * Show Article (Accueil)
+     */
+    public function showAllArticle()
     {
-        return $this->getPDO()->query('SELECT * FROM advert')->fetchAll();
+        return $this->getPDO()->query(
+            "SELECT * FROM {$this->advert} 
+                INNER JOIN {$this->category}
+                    WHERE {$this->advert}.category_id = {$this->category}.id_category"
+        )->fetchAll();
+    }
+
+    /**
+     * Show Category List
+     */
+    public function showCategoryList()
+    {
+        return $this->getPDO()->query(
+            "SELECT * FROM {$this->category}"
+        )->fetchAll();
     }
 }
