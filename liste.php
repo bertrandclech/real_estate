@@ -9,19 +9,19 @@ spl_autoload_register(function($classe) {
 $advertManager = new AdvertManager($bdd);
 
 // Récupération de toutes les annonces
-$ads = $advertManager->getLastAdverts();
+$ads = $advertManager->getAllAdverts();
 
 ?>
 <!DOCTYPE html>
 <html lang="fr">
 	<head>
 		<meta charset="utf-8">
-		<title>Bienvenue sur annonces.com</title>
+		<title>Liste des annonces</title>
 		<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
 	</head>
 	<body>
 		<div class="container p-5">
-			<h1>Bienvenue sur annonces.com</h1>
+			<h1>Liste de toutes nos annonces</h1>
 
 			<div class="container-fluid">
 			<!-- Ici on traite les messages de retour des différentes exécution en vérifiant si un message est présent en Session
@@ -39,7 +39,7 @@ $ads = $advertManager->getLastAdverts();
 				</div>
 
             <a href="ajouter.php" class="btn btn-primary mt-2">Ajouter une annonce</a>
-            <a href="liste.php" class="btn btn-secondary mt-2">Toutes nos annonces</a>
+            <a href="index.php" class="btn btn-secondary mt-2">Acceuil</a>
 
             <?php
             // Suppression d'une annonce
@@ -62,6 +62,8 @@ $ads = $advertManager->getLastAdverts();
                         <th>Catégorie</th>
                         <th>Prix</th>
                         <th>Date de création</th>
+  
+                        <th class="text-right">Actions</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -76,7 +78,12 @@ $ads = $advertManager->getLastAdverts();
                         <td><?php echo $ad['category']; ?></td>
                         <td><?php echo $ad['price']; ?> €</td>
                         <td><?php echo $ad['created_at']; ?></td>
-
+                        
+                        <td class="text-right">
+                            <a href="details.php?id=<?php echo $ad['id_advert']; ?>" class="btn btn-warning">Voir le détail</a>
+                            <a href="editer.php?id=<?php echo $ad['id_advert']; ?>" class="btn btn-primary">Mettre à jour</a>
+                            <a onclick="return confirm('Voulez-vous bien supprimer ?');" href="index.php?id=<?php echo $ad['id_advert']; ?>&type=supprimer" class="btn btn-danger">Supprimer</a>
+                        </td>
                     </tr>
                 <?php endforeach; ?>
 
