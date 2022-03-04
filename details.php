@@ -28,7 +28,7 @@ if (!$advert) {
 </head>
 <body>
 <div class="container p-5">
-	<h1>Détails d'une annonce: "<?php echo $advert->getTitleAd() ?>"</h1>
+	<h1>Détails d'une annonce: "<?php echo $advert['title'] ?>"</h1>
 
     <a href="index.php" class="btn btn-secondary mt-2">Retour à la liste</a>
 
@@ -54,13 +54,13 @@ if (!$advert) {
                 </thead>
                 <tbody>
                     <tr>
-                        <td><?php echo $advert->getTitleAd();  ?></td>
-                        <td><?php echo $advert->getDescriptionAd();  ?></td>
-                        <td><?php echo $advert->getPostcodeAd();  ?></td> 
-                        <td><?php echo $advert->getCityAd(); ?></td>
-                        <td><?php echo $advert->getPriceAd(); ?> €</td>
-                        <td><?php echo $advert->getCategoryAd(); ?></td>
-                        <td><?php echo $advert->getReservation_messageAd(); ?></td>
+                        <td><?php echo $advert['title']; ?></td>
+                        <td><?php echo $advert['description'];  ?></td>
+                        <td><?php echo $advert['postcode']; ?></td> 
+                        <td><?php echo $advert['city']; ?></td>
+                        <td><?php echo $advert['price']; ?> €</td>
+                        <td><?php echo $advert['category']; ?></td>
+                        <td><?php echo $advert['reservation_message']; ?></td>
                     </tr>
                 </tbody>
             </table>

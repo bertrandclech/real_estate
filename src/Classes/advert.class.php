@@ -10,6 +10,7 @@
 	 private $postcode;
 	 private $reservation_message;
 	 private $category;
+//	 private $category_id;
 	 private $created_at;
  
 	 public function __construct(array $data) {
@@ -168,13 +169,13 @@
 	 * @return string
 	 */
 	public function getCategoryAd() {
-		return $this->category;
+		return $this->category_id;
 	}
 
 	/**
 	 * SetCityAdvert
 	 *
-	 * @param integer $str
+	 * @param string $str
 	 * @return object Advert
 	 */
 	public function setCategoryAd(string $str) {
@@ -201,6 +202,8 @@
         $this->created_at = $datetime;
         return $this;
     }
+
+	
 
 }
 

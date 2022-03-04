@@ -57,14 +57,14 @@ public function getAllAdverts() {
     {
 
         // Préparation de ma requête SQL
-        $requete = $this->bdd->prepare("SELECT id_advert, title, description, postcode, city, price,DATE_FORMAT(created_at, '%d/%m/%Y') AS created_at  FROM advert WHERE id_advert = :id");
+        $requete = $this->bdd->prepare("SELECT *, DATE_FORMAT(created_at, '%d/%m/%Y') AS created_at  FROM advert INNER JOIN category WHERE category.id_category = advert.category_id 				WHERE id_advert = :id");
         $requete->bindValue(':id', intval($id), PDO::PARAM_INT);
         $requete->execute();
         $res = $requete->fetch();
-		$ad = new Advert( $res );
+	//	$ad = new Advert( $res );
 
         // Retourne les informations trouvées
-        return $ad;
+        return $res;
     }
 
 /**
@@ -160,7 +160,7 @@ public function addAdvertFromArray(array $ad)
         $delete_advert = $this->bdd->prepare("DELETE FROM advert WHERE id_advert = :id");
         $delete_advert->bindValue(':id', $id, PDO::PARAM_INT);
         $delete_advert->execute();
-		$delete_advert->closeCuursor();
+		$delete_advert->closeCursor();
 
 		return $delete_advert->rowCount();
     }

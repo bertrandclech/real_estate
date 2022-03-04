@@ -46,7 +46,7 @@ $ads = $advertManager->getLastAdverts();
             // Vérifie si un id est envoyé et si une variable $type est bien envoyée
             if (!empty($_GET['id']) && !empty($_GET['type']) && $_GET['type'] === 'supprimer') {
 	            // Suppression d'une annonce en BDD
-	            $advertManager->deleteAdventById($_GET['id']);
+	            $advertManager->deleteAdvertById($_GET['id']);
             }
 
             ?>
