@@ -1,5 +1,6 @@
 <?php
 
+include('autoload.php');
 
 class AdvertManager {
     private $bdd;
@@ -25,7 +26,7 @@ public function getAllCategories() {
     public function getLastAdverts() {
 
     //    return $this->bdd->query("SELECT advert.id, advert.title, advert.description,  FROM `advert`, category.value AS category INNER JOIN advert.category_id = category.category_id")->fetchAll(PDO::FETCH_ASSOC);
-		return $this->bdd->query("SELECT advert.id_advert, advert.title, advert.description, advert.postcode, advert.city, advert.price, category.value AS category, advert.created_at 
+		return $this->bdd->query("SELECT advert.id_advert, advert.title, advert.description, advert.postcode, advert.city, advert.price, category.value AS category, DATE_FORMAT(advert.created_at, '%d/%m/%Y') AS created_at	  
 	FROM advert INNER JOIN category WHERE category.id_category = advert.category_id
 	ORDER BY advert.created_at DESC LIMIT 15")->fetchAll(PDO::FETCH_ASSOC);
 
@@ -40,7 +41,7 @@ public function getAllCategories() {
 public function getAllAdverts() {
 
     //    return $this->bdd->query("SELECT advert.id, advert.title, advert.description,  FROM `advert`, category.value AS category INNER JOIN advert.category_id = category.category_id")->fetchAll(PDO::FETCH_ASSOC);
-		return $this->bdd->query("SELECT advert.id_advert, advert.title, advert.description, advert.postcode, advert.city, advert.price, category.value AS category, advert.created_at 
+		return $this->bdd->query("SELECT advert.id_advert, advert.title, advert.description, advert.postcode, advert.city, advert.price, category.value AS category, DATE_FORMAT(advert.created_at, '%d/%m/%Y') AS created_at 
 	FROM advert INNER JOIN category WHERE category.id_category = advert.category_id")->fetchAll(PDO::FETCH_ASSOC);
 
 
@@ -56,8 +57,8 @@ public function getAllAdverts() {
     {
 
         // Préparation de ma requête SQL
-        $requete = $this->bdd->prepare("SELECT * FROM advert WHERE id_advert = :id");
-        $requete->bindValue(':id', $id, PDO::PARAM_INT);
+        $requete = $this->bdd->prepare("SELECT id_advert, title, description, postcode, city, price,DATE_FORMAT(created_at, '%d/%m/%Y') AS created_at  FROM advert WHERE id_advert = :id");
+        $requete->bindValue(':id', intval($id), PDO::PARAM_INT);
         $requete->execute();
         $res = $requete->fetch();
 		$ad = new Advert( $res );

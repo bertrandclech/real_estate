@@ -11,6 +11,8 @@ $advertManager = new AdvertManager($bdd);
 // Récupération des information d'une annonce
 $advert = $advertManager->getAdvertById($_GET['id']);
 
+var_dump($advert);  
+
 // Si l'annonce n'existe pas, redirection vers la liste des magazines
 if (!$advert) {
     header('Location: index.php');
@@ -26,20 +28,21 @@ if (!$advert) {
 </head>
 <body>
 <div class="container p-5">
-	<h1>Détails d'une annonce: "<?php echo $advert->getTitre(   ) ?>"</h1>
+	<h1>Détails d'une annonce: "<?php echo $advert->getTitleAd() ?>"</h1>
 
     <a href="index.php" class="btn btn-secondary mt-2">Retour à la liste</a>
 
 	<div class="row mt-5">
  <!--       <div class="col-2">
-            <img src="images/<?php echo $advert->getPicture(); ?>" alt="<?php echo $advert->getTitre() ?>" class="img-fluid">
+            <img src="images/
+            <?php
+            //echo $advert->getPicture(); ?>" alt="<?php //echo $advert->getTitleAd() ?>" class="img-fluid">
         </div>
 -->
         <div class="col-10">
             <table class="table table-striped">
                 <thead>
                     <tr>
-                        <th>Id</th>
                         <th>Titre</th>
                         <th>Description</th>
                         <th>Code postal</th>
@@ -51,14 +54,13 @@ if (!$advert) {
                 </thead>
                 <tbody>
                     <tr>
-                        <td><?php echo $advert->getIdAdvert() ?></td>
-                        <td><?php echo $advert->getTitleAdvert()  ?></td>
-                        <td><?php echo $advert->getDescriptionAdvert()  ?></td>
-                        <td><?php echo $advert->getPostcodeAdvert()  ?></td> 
-                        <td><?php echo $advert->getCityAdvert()  ?></td>
-                        <td><?php echo $advert->getPriceAdvert()  ?> m2</td>
-                        <td><?php echo $advert->getCategoryAdvert()  ?> €</td>
-                        <td><?php echo $advert->getReservationmessageAdvert()  ?></td>
+                        <td><?php echo $advert->getTitleAd();  ?></td>
+                        <td><?php echo $advert->getDescriptionAd();  ?></td>
+                        <td><?php echo $advert->getPostcodeAd();  ?></td> 
+                        <td><?php echo $advert->getCityAd(); ?></td>
+                        <td><?php echo $advert->getPriceAd(); ?> €</td>
+                        <td><?php echo $advert->getCategoryAd(); ?></td>
+                        <td><?php echo $advert->getReservation_messageAd(); ?></td>
                     </tr>
                 </tbody>
             </table>

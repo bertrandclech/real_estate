@@ -38,7 +38,7 @@
 	 * @return object Advert
 	 */
 	public function setIdAd(int $id) {
-        $this->id = $id;
+        $this->id_advert = $id;
         return $this;
     }
 
@@ -78,7 +78,7 @@
 	 * @return object Advert
 	 */
 	public function setDescriptionAd(string $str) {
-        $this->title = $str;
+        $this->description = $str;
         return $this;
     }
 
@@ -88,7 +88,7 @@
 	 * @return int
 	 */
 	public function getPostcodeAd() {
-		return $this->postcodde;
+		return $this->postcode;
 	}
 
 	/**
@@ -194,10 +194,10 @@
 	/**
 	 * SetCreated_atAdvert
 	 *
-	 * @param datetime $datetime
-	 * @return object Advert
+	 * @param string $datetime
+	 * @return object Advert			
 	 */
-	public function setCreated_atAd(str $datetime) {
+	public function setCreated_atAd(string $datetime) {
         $this->created_at = $datetime;
         return $this;
     }
