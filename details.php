@@ -2,9 +2,7 @@
 
 require_once('bdd.php');
 
-spl_autoload_register(function($classe) {
-    require_once 'src/classes/'.$classe.'.class.php';
-});
+require_once('autoload.php');
 
 $advertManager = new AdvertManager($bdd);
 

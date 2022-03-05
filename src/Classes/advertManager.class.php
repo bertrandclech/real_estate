@@ -38,7 +38,7 @@ public function getAllCategories() {
  * 
  * @return array
  */
-public function getAllAdverts() {
+	public function getAllAdverts() {
 
     //    return $this->bdd->query("SELECT advert.id, advert.title, advert.description,  FROM `advert`, category.value AS category INNER JOIN advert.category_id = category.category_id")->fetchAll(PDO::FETCH_ASSOC);
 		return $this->bdd->query("SELECT advert.id_advert, advert.title, advert.description, advert.postcode, advert.city, advert.price, category.value AS category, DATE_FORMAT(advert.created_at, '%d/%m/%Y') AS created_at 
