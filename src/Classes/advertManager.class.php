@@ -57,7 +57,7 @@ public function getAllCategories() {
     {
 
         // Préparation de ma requête SQL
-        $requete = $this->bdd->prepare("SELECT *, DATE_FORMAT(created_at, '%d/%m/%Y') AS created_at  FROM advert INNER JOIN category WHERE category.id_category = advert.category_id 				WHERE id_advert = :id");
+        $requete = $this->bdd->prepare("SELECT *, category.value AS category, DATE_FORMAT(created_at, '%d/%m/%Y') AS created_at  FROM advert INNER JOIN category WHERE category.id_category = advert.category_id AND id_advert = :id");
         $requete->bindValue(':id', intval($id), PDO::PARAM_INT);
         $requete->execute();
         $res = $requete->fetch();
@@ -125,26 +125,27 @@ public function addAdvertFromArray(array $ad)
     /**
      * Undocumented function
      *
-     * @param Advert $advert
+     * @param array 
      * @return int
      */
     // Update a  guitar in the bdd and returns the status
-    public function updateAdvert(Advert $advert)
+    public function updateAdvertFromArray(array $advert)
     {
         // Préparation de la requète SQL
-        $update_advert = bdd->prepare("UPDATE `advert` SET `title` = :title, `description` = :description, `postcode` = :postcode, `city`= :city, `price` = :price, `resservtion_message` = :reservation_message, `categorie` = :categorie WHERE `id_advert` = :id;");
+        $update_advert = $this->bdd->prepare("UPDATE `advert` SET `title` = :title, `description` = :description, `postcode` = :postcode, `city`= :city, `price` = :price, `reservation_message` = :reservation_message, `category_id` = :category_id WHERE `id_advert` = :id;");
         // On associe les différentes variables aux marqueurs en respectant les types
-        $update_advert->bindValue(':title', $advert->getTitle(), PDO::PARAM_STR);
-        $update_advert->bindValue(':description', $advert->getDescription(), PDO::PARAM_STR);
-        $update_advert->bindValue(':postcodde', $advert->getPostcode(), PDO::PARAM_INT);
-        $update_advert->bindValue(':city', $advert->getCity(), PDO::PARAM_STR);
-        $update_advert->bindValue(':price', $advert->getPrice(), PDO::PARAM_INT);
-        $update_advert->bindValue(':reservation_message', $advert->getReservation(), PDO::PARAM_STR);
-	//	$update_advert->bindValue(':idcategory', $idcategory, PDO::PARAM_INT);
+		$update_advert->bindValue(':id', $advert['id'], PDO::PARAM_INT);
+        $update_advert->bindValue(':title', $advert['title'], PDO::PARAM_STR);
+        $update_advert->bindValue(':description', $advert['description'], PDO::PARAM_STR);
+        $update_advert->bindValue(':postcode', $advert['postcode'], PDO::PARAM_INT);
+        $update_advert->bindValue(':city', $advert['city'], PDO::PARAM_STR);
+        $update_advert->bindValue(':price', $advert['price'], PDO::PARAM_INT);
+        $update_advert->bindValue(':reservation_message', $advert['reservation_message'], PDO::PARAM_STR);
+		$update_advert->bindValue(':category_id', $advert['category'], PDO::PARAM_INT);
         // On execute la requète
         $update_advert->execute();
-        $update_advert>closeCursor();
-        return($update_advert->rowCount());
+        $update_advert->closeCursor();
+        return( $update_advert->rowCount() );
 
     }
 

@@ -16,7 +16,12 @@ if (! checkdir("images") ) {
 }
 */
 // Récupère l'advert en cours
-$ad = $adManager->getAdvertById();
+$ad = $adManager->getAdvertById($_GET['id']);
+
+// Récupère les categories
+$categories = $adManager->getAllCategories();
+
+var_dump($categories);
 
 ?>
 
@@ -24,12 +29,12 @@ $ad = $adManager->getAdvertById();
 <html lang="fr">
 	<head>
 		<meta charset="utf-8">
-		<title>Nouvel annonce</title>
+		<title>Modifier une annonce</title>
 		<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
 	</head>
 	<body>
 		<div class="container p-5">
-			<h1>Nouvelle annonce</h1>
+			<h1>Modifier une annonce</h1>
 
 			<div class="container-fluid">
 			<!-- Ici on traite les messages de retour des différentes exécution en vérifiant si un message est présent en Session
@@ -71,7 +76,7 @@ $ad = $adManager->getAdvertById();
 					if ($extension) {
 */
 						// Insertion en BDD avec récupération de l'ID
-						$lastId = $adManager->addAdvertFromArray($_POST);
+						$lastId = $adManager->updateAdvertFromArray($_POST);
 /*
 						// Upload de l'image
 						$nom_image = uploadImage($_FILES['photo'], $lastId, $extension);
@@ -95,38 +100,42 @@ $ad = $adManager->getAdvertById();
             ?>
 
 			<form method="post" class="mt-5" enctype="multipart/form-data" novalidate>
+				<input type="hidden" class="form-control" name="id" value="<?php echo $_GET['id']; ?>">
 				<div class="form-group">
 					<label>Titre</label>
-					<input type="text" class="form-control" name="title">
+					<input type="text" class="form-control" name="title" value="<?php echo $ad['title']; ?>">
 				</div>
 				<div class="form-group">
 					<label>Description</label>
-					<input type="text" class="form-control" name="description">
+					<input type="text" class="form-control" name="description" value="<?php echo $ad['description']; ?>">
 				</div>
 				<div class="form-group">
 					<label>Code postal</label>
-					<input type = "number" class="form-control" name="postcode"></textarea>
+					<input type = "number" class="form-control" name="postcode" value="<?php echo $ad['postcode']; ?>"/>
 				</div>	
 				<div class="form-group">
 					<label>Ville</label>
-					<input type="text" class="form-control" name="city"></textarea>
+					<input type="text" class="form-control" name="city" value="<?php echo $ad['city']; ?>"/>
 				</div>	
 				<div class="form-group">
 					<label>Type</label>
-                    <select name="category" class="custom-select">
-                        <?php foreach ($categories as $cat): ?>
-                            <option value="<?php echo $cat['category_id'] ?>"><?php echo $cat['category'] ?></option>
-                        <?php endforeach; ?>
-                    </select>
+					<select name="category" class="custom-select">
+						<?php foreach ($categories as $cat): ?>
+							<option value="<?php echo $cat['category_id'] ?>" <?php if($cat['category'] === $ad['category']) { echo 'selected'; } ?>><?php echo $cat['category'] ?></option>
+						<?php endforeach; ?>
+					</select>
 				</div>	
 				<div class="form-group">
 					<label>Prix</label>
 					<div class="input-group">
-						<input type="number" step="10"	 class="form-control" name="price">
+						<input type="number" step="10" class="form-control" name="price" value="<?php echo $ad['price']; ?>"/>
 						<div class="input-group-append">
 							<div class="input-group-text">€</div>
 						</div>
 					</div>
+				</div>	
+				<div class="form-group">
+					<input type="hidden" class="form-control" name="reservation_message" value="disponible"/>
 				</div>		
 <!--				<div class="form-group">
 					<label>Photo</label>
@@ -137,7 +146,7 @@ $ad = $adManager->getAdvertById();
 				</div>
 						-->
 				<a href="index.php" class="btn btn-outline-secondary">Annuler</a>
-				<input type="submit" class="btn btn-primary" name="submit" value="Modifoer">
+				<input type="submit" class="btn btn-primary" name="submit" value="Modifier">
 			</form>
 		</div>
 	</body>
