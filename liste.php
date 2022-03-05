@@ -61,6 +61,7 @@ $ads = $advertManager->getAllAdverts();
                         <th>ville</th>
                         <th>Catégorie</th>
                         <th>Prix</th>
+                        <th>Statut</th>
                         <th>Date de création</th>
   
                         <th class="text-right">Actions</th>
@@ -77,6 +78,7 @@ $ads = $advertManager->getAllAdverts();
                         <td><?php echo $ad['city']; ?></td>
                         <td><?php echo $ad['category']; ?></td>
                         <td><?php echo $ad['price']; ?> €</td>
+                        <td><?php echo $ad['reservation_message']; ?></td>
                         <td><?php echo $ad['created_at']; ?></td>
                         
                         <td class="text-right">

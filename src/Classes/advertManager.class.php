@@ -41,7 +41,7 @@ public function getAllCategories() {
 	public function getAllAdverts() {
 
     //    return $this->bdd->query("SELECT advert.id, advert.title, advert.description,  FROM `advert`, category.value AS category INNER JOIN advert.category_id = category.category_id")->fetchAll(PDO::FETCH_ASSOC);
-		return $this->bdd->query("SELECT advert.id_advert, advert.title, advert.description, advert.postcode, advert.city, advert.price, category.value AS category, DATE_FORMAT(advert.created_at, '%d/%m/%Y') AS created_at 
+		return $this->bdd->query("SELECT advert.id_advert, advert.title, advert.description, advert.postcode, advert.city, advert.price, advert.reservation_message, category.value AS category, DATE_FORMAT(advert.created_at, '%d/%m/%Y') AS created_at 
 	FROM advert INNER JOIN category WHERE category.id_category = advert.category_id")->fetchAll(PDO::FETCH_ASSOC);
 
 
@@ -165,4 +165,19 @@ public function addAdvertFromArray(array $ad)
 
 		return $delete_advert->rowCount();
     }
+
+
+	public function book($id)
+	{
+		       // Préparation de la requète SQL
+			   $book = $this->bdd->prepare("UPDATE `advert` SET `reservation_message` = :reservation_message WHERE `id_advert` = :id");
+			   // On associe les différentes variables aux marqueurs en respectant les types
+			   $book->bindValue(':id', intval($id), PDO::PARAM_INT);
+			   $book->bindValue(':reservation_message', 'réservé', PDO::PARAM_STR);
+			   // On execute la requète
+			   $book->execute();
+			   $book->closeCursor();
+			   return( $book->rowCount() );
+	}
+
 }
