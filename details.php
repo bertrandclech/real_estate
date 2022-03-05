@@ -9,7 +9,7 @@ $advertManager = new AdvertManager($bdd);
 // Récupération des information d'une annonce
 $advert = $advertManager->getAdvertById($_GET['id']);
 
-var_dump($advert);  
+//var_dump($advert);  
 
 // Si l'annonce n'existe pas, redirection vers la liste des magazines
 if (!$advert) {
@@ -26,7 +26,7 @@ if (!$advert) {
 </head>
 <body>
 <div class="container p-5">
-	<h1>Détails d'une annonce: "<?php echo $advert['title'] ?>"</h1>
+	<h1><?php echo $advert['title'] ?></h1>
 
     <a href="index.php" class="btn btn-secondary mt-2">Retour à la liste</a>
 

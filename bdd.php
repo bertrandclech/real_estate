@@ -26,7 +26,7 @@ try {
 		PDO::ATTR_DEFAULT_FETCH_MODE => PDO::FETCH_ASSOC
 	]);
 
-	echo 'Base de données connectée';
+//	echo 'Base de données connectée';
 }
 catch (Exception $error) {
 	// Attrape une exception
